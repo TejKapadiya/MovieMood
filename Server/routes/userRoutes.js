@@ -1,9 +1,15 @@
 const User = require('../models/userModels.js')
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+require('dotenv').config();  // Add this line at the very top of your file
+const jwt = require('jsonwebtoken');
+const authMiddlewares = require('../middlewares/authMiddlewares.js');
 
+// Register Endpoint
 router.post('/register', async (req, res) => {
     try {
+        console.log("called api==========", req.body);
         const userExists = await User.findOne({ email: req.body.email });
         if (userExists) throw new Error("User with this email id already exists");
 
