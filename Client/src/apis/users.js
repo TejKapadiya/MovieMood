@@ -4,11 +4,12 @@ export const  registerUser=async(payload)=>{
     return await apiRequest({
         method:'POST',
         endPoint:'/api/users/register',
-        payload
+        payload:payload
     })
 }
 
 export const  loginUser=async(payload)=>{
+    console.log(payload)
     return await apiRequest({
         method:'POST',
         endPoint:'/api/users/login',

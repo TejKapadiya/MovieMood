@@ -1,80 +1,82 @@
 const User = require('../models/userModels.js')
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs')
-require('dotenv').config();
 
-const jwt = require('jsonwebtoken')
-const authMiddlewares = require('../middlewares/authMiddlewares.js')
-
-
-//Register Endpoint
 router.post('/register', async (req, res) => {
     try {
-        console.log("called api==========", req.body)
-        // console.log("users",User)
         const userExists = await User.findOne({ email: req.body.email });
-        console.log("userExists", userExists)
         if (userExists) throw new Error("User with this email id already exists");
 
         req.body.password = await bcrypt.hash(req.body.password, 10);
 
         await User.create(req.body);
-        //we can also use save()
-
-        res.status(200).json({ message: "User successfully registered", success: true })
+        res.status(200).json({ message: "User successfully registered", success: true });
     } catch (error) {
-        console.log("catch=========", error.message)
-        res.status(500).json({ message: error.message, success: false })
+        res.status(500).json({ message: error.message, success: false });
     }
+});
 
-})
-
+// Login Endpoint
 router.post('/login', async (req, res) => {
-    // console.log("login api called")
     try {
-        // check if user exists
-        // console.log("login api called11111111111111")
         const user = await User.findOne({ email: req.body.email });
-        // console.log("user---", user)
-        if (!user) {
-            throw new Error("User not exist ")
-        }
-        // req.body.password= await bcrypt.hash(req.body.password,10);
-        //  check if user password is coreect
+        if (!user) throw new Error("User does not exist");
+
         const isCorrectPassword = await bcrypt.compare(req.body.password, user.password);
-        // console.log(req.body.password, user.password)
-        // console.log("iscoreect", isCorrectPassword)/
         if (!isCorrectPassword) throw new Error("Invalid password");
-        // encryt the data for security and followup in authMiddlewares.js
-        // Check if user password is correct
-        // const isCorrectPassword = await bcrypt.compare(req.body.password, user.password);
-        // console.log(req.body.password, user.password);
-        // console.log("isCorrectPassword", isCorrectPassword);
 
-        // If password is incorrect, throw an error
-        // if (!isCorrectPassword) {
-        //     throw new Error("Invalid password");
-        //     // Proceed with your logic (like generating a token or continuing with the user authentication)
-        // }
-      
-        const token = jwt.sign({ userId: user._id }, process.env.secret_jwt, { expiresIn: "1d" })
-        // console.log("token", token)
-        res.status(200).json({ message: "User logged In Sucessfully", success: true, token: token })
+        const token = jwt.sign({ userId: user._id }, "yoursecretkey", { expiresIn: "1d" });
+        res.status(200).json({ message: "User logged in successfully", success: true, token });
     } catch (error) {
-        res.status(500).json({ message: error.message, success: false })
+        res.status(500).json({ message: error.message, success: false });
     }
+});
 
-})
-
-//protected route get current user
+// Protected Route: Get Current User
 router.get('/get-current-user', authMiddlewares, async (req, res) => {
     try {
-        // console.log(" GetCurrentUser callled=============",req.userId)
         const user = await User.findById(req.userId).select("-password");
-        res.status(200).json({ message: "User fetched Successfully", success: true, data: user })
+        res.status(200).json({ message: "User fetched successfully", success: true, data: user });
     } catch (error) {
-        res.status(500).json({ message: error.message, success: false })
+        res.status(500).json({ message: error.message, success: false });
     }
-})
+});
+
+// Update User Details Endpoint (NEW ROUTE)
+router.put('/update-user', authMiddlewares, async (req, res) => {
+    try {
+        // Get the data from request body
+        const { name, email, phone, address } = req.body;
+
+        // Check if the user exists
+        const user = await User.findById(req.userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false });
+        }
+
+        // Check if the new email is already taken by someone else
+        if (email && email !== user.email) {
+            const emailExists = await User.findOne({ email });
+            if (emailExists) {
+                return res.status(400).json({ message: "Email is already in use", success: false });
+            }
+        }
+
+        // Update the user's details (except password)
+        const updatedUser = await User.findByIdAndUpdate(
+            req.userId,
+            { name, email, phone, address }, // Only update fields provided
+            { new: true, runValidators: true }  // `new: true` returns the updated user, `runValidators: true` ensures validation is applied
+        );
+
+        res.status(200).json({
+            message: "User details updated successfully",
+            success: true,
+            data: updatedUser,
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message, success: false });
+    }
+});
+
 module.exports = router;

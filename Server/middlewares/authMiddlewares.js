@@ -1,5 +1,8 @@
 const jwt=require('jsonwebtoken')
 //token validation
+require('dotenv').config();
+const secret_jwt=require("./config/SECRET_KEY");
+
 module.exports=(req,res,next)=>{
 try {
     // console.log("req---",req)
