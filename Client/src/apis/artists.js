@@ -24,7 +24,7 @@ export const GetArtistById=async(id)=>{
     });
 };
 
-export const UpadteArtist=async(id,payload)=>{
+export const UpdateArtist=async(id,payload)=>{
 console.log("payload for update",payload)
     return await apiRequest({
         method:"PUT",

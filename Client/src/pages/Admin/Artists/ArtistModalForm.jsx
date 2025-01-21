@@ -3,7 +3,7 @@ import Input from "antd/es/input/Input";
 import { antValidatioError } from "../../../helpers";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../redux/loadersSlice";
-import { AddArtist, UpadteArtist } from "../../../apis/artists";
+import { AddArtist, UpdateArtist} from "../../../apis/artists";
 import { UploadImage } from "../../../apis/images";
 import moment from "moment";
 import Item from "antd/es/list/Item";
@@ -29,7 +29,7 @@ function ArtistModalForm({
       // const response = await AddArtist(values);
       let response;
       if (selectedArtist) {
-        response = await UpadteArtist(selectedArtist._id, values);
+        response = await UpdateArtist(selectedArtist._id, values);
       } else {
         response = await AddArtist(values);
       }
@@ -53,7 +53,7 @@ function ArtistModalForm({
       const response = await UploadImage(formData);
       console.log("slected in image upload", selectedArtist);
       if (response.success) {
-        await UpadteArtist(selectedArtist._id, {
+        await UpdateArtist(selectedArtist._id, {
           ...selectedArtist,
           images: [...(selectedArtist?.images || []), response.data],
         });
@@ -71,7 +71,7 @@ function ArtistModalForm({
     console.log("image",image)
     try {
       dispatch(setLoading(true));
-      const response = await UpadteArtist(selectedArtist._id, {
+      const response = await UpdateArtist(selectedArtist._id, {
         ...selectedArtist,
         images: selectedArtist?.images?.filter((item) => item !== image),
       });
