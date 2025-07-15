@@ -3,6 +3,24 @@ const express = require("express");
 const router = express.Router();
 const authMiddlewares = require("../middlewares/authMiddlewares");
 
+
+
+// // GET route to fetch all movies with populated artists (hero, heroine, director)
+// router.get("/api/movies", async (req, res) => {
+//   try {
+//     const movies = await Movie.find()
+//       .populate("hero", "name") // Only include 'name' field for hero
+//       .populate("heroine", "name") // Only include 'name' field for heroine
+//       .populate("director", "name") // Only include 'name' field for director
+//       .populate("createdBy", "name"); // Only include 'name' field for createdBy user
+//     res.json(movies);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Failed to fetch movies" });
+//   }
+// });
+
+
 //Add movie
 
 router.post("/add-movie", authMiddlewares, async (req, res) => {
@@ -19,10 +37,16 @@ router.post("/add-movie", authMiddlewares, async (req, res) => {
 router.get("/", authMiddlewares, async (req, res) => {
   try {
     const movies = await Movie.find()
-      .populate("hero")
-      .populate("heroine")
-      .populate("director")
-      .populate("createdBy");
+      .populate("hero", "name")
+      .populate("heroine", "name")
+      .populate("director", "name")
+      .populate("createdBy", "name");
+  //   const movies = await Movie.find().lean(); // Convert Mongoose documents to plain objects
+  //   movies.forEach(movie => {
+  // if (movie.createdBy && movie.createdBy.password) {
+  //   delete movie.createdBy.password;
+  // }});
+
     res.status(200).json({ movies, success: true });
   } catch (error) {
     res.status(500).json({ message: error.message, success: false });

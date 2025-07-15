@@ -9,23 +9,28 @@ export default defineConfig({
       '/api/users':{
         target:"http://localhost:5000",
         changeOrigin:true,
-        secure:true
+        secure:false
       },
       '/api/artists':{
         target:"http://localhost:5000",
         changeOrigin:true,
-        secure:true
+        secure:false
       },
       '/api/images':{
         target:"http://localhost:5000",
         changeOrigin:true,
-        secure:true
+        secure:false
       },
       '/api/movies':{
         target:"http://localhost:5000",
         changeOrigin:true,
-        secure:true
+        secure:false
       }
+      // '/movies':{
+      //   target:"http://localhost:5000",
+      //   changeOrigin:true,
+      //   secure:false
+      // }
     }
   }
 })
