@@ -1,0 +1,105 @@
+.my-reviews {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--card-bg, #fff);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--text-color, #333);
+    margin-bottom: 20px;
+}
+
+.review {
+    background: var(--input-bg, #f9f9f9);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.review:hover {
+    transform: scale(1.02);
+}
+
+h3 {
+    font-size: 18px;
+    color: var(--text-color, #222);
+    margin-bottom: 5px;
+}
+
+p {
+    font-size: 16px;
+    color: var(--text-color, #555);
+    margin: 5px 0;
+}
+
+/* Edit Review Section */
+textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border 0.2s ease-in-out;
+}
+
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Buttons */
+button {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:first-of-type {
+    background: #007bff;
+    color: white;
+}
+
+button:first-of-type:hover {
+    background: #0056b3;
+}
+
+button:last-of-type {
+    background: #dc3545;
+    color: white;
+}
+
+button:last-of-type:hover {
+    background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .my-reviews {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,105 @@
+/* LikeList.css */
+.movie-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: var(--card-bg, #fff);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    color: var(--text-color, #333);
+    margin-bottom: 20px;
+}
+
+.movie-container p {
+    font-size: 16px;
+    color: var(--text-color, #555);
+}
+
+/* Movie Card Grid */
+.movie-card {
+    background: var(--card-bg, #f9f9f9);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block;
+    width: 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+/* Movie Poster */
+.movie-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Movie Title */
+.movie-title {
+    font-size: 16px;
+    margin: 10px 0;
+    color: var(--text-color, #222);
+}
+
+/* Buttons */
+.details-button,
+.remove-button {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* Details Button */
+.details-button {
+    background: #007bff;
+    color: white;
+}
+
+.details-button:hover {
+    background: #0056b3;
+    transform: scale(1.03);
+}
+
+/* Remove Like Button */
+.remove-button {
+    background: #ff4d4d;
+    color: white;
+}
+
+.remove-button:hover {
+    background: #cc0000;
+    transform: scale(1.03);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .movie-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .movie-card {
+        width: 100%;
+    }
+
+    .details-button,
+    .remove-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

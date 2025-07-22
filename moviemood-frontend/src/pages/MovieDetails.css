@@ -1,0 +1,152 @@
+:root {
+    --card-bg: #fff;
+    --text-color: #333;
+    --border-color: #ccc;
+    --input-bg: #f9f9f9;
+}
+
+[data-theme="dark"] {
+    --card-bg: #1e1e1e;
+    --text-color: #fff;
+    --border-color: #444;
+    --input-bg: #2a2a2a;
+}
+/* MovieDetails.css */
+.movie-details {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--card-bg, #fff);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.details-poster {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.details-poster:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--text-color, #333);
+}
+
+p {
+    font-size: 16px;
+    color: var(--text-color, #555);
+}
+
+h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: var(--text-color, #222);
+}
+
+/* Review Section */
+.review-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--input-bg, #f9f9f9);
+    border-radius: 8px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border 0.2s ease-in-out;
+}
+
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.back-button {
+    background: #6c757d;
+    color: white;
+    margin-right: 10px;
+}
+
+.back-button:hover {
+    background: #5a6268;
+}
+
+.my-review-button {
+    background: #28a745;
+    color: white;
+}
+
+.my-review-button:hover {
+    background: #218838;
+}
+
+/* Error Message */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* User Reviews */
+.review-list {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--input-bg, #f9f9f9);
+    border-radius: 8px;
+}
+
+.review {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color, #ddd);
+}
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review p {
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movie-details {
+        padding: 15px;
+    }
+
+    .details-poster {
+        max-width: 250px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+

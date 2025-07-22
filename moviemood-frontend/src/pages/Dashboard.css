@@ -1,0 +1,72 @@
+/* Dashboard Layout */
+.dashboard {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #1e1e2f, #2c2c3b);
+    color: white;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+}
+
+/* User Info */
+.user-info {
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+/* Dashboard Buttons */
+.dashboard-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-btn, .logout-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard-btn {
+    background-color: #ffcc00;
+    color: black;
+}
+
+.dashboard-btn:hover {
+    background-color: #e6b800;
+}
+
+.logout-btn {
+    background-color: #ff4500;
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: #cc3700;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .dashboard-card {
+        width: 90%;
+    }
+}
